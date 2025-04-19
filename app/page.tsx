@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils"
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip"
 import { toast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
+import { Chatbot } from "@/components/Chatbot"
 
 // 定义笔记类型
 type Note = {
@@ -330,6 +331,11 @@ export default function HomePage() {
     router.push(`/edit/${noteId}`)
   }
 
+  // 获取所有笔记内容作为上下文
+  const getAllNotesContent = () => {
+    return notes.map(note => `标题：${note.title}\n内容：${note.content}`).join('\n\n')
+  }
+
   return (
     <div className="flex h-screen bg-white text-gray-900">
       {/* Left Sidebar */}
@@ -536,7 +542,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      {/* 提示消息 */}
+      <Chatbot context={getAllNotesContent()} />
       <Toaster />
     </div>
   )

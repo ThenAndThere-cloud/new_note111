@@ -17,6 +17,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 import { Usable } from "react"
+import { Chatbot } from "@/components/Chatbot"
 
 // 定义笔记类型
 type Note = {
@@ -438,6 +439,12 @@ export default function EditPage({ params }: { params: Usable<{ id: string }> })
     console.log('标签系统更新完成')
   }
 
+  // 获取当前笔记内容作为上下文
+  const getCurrentNoteContent = () => {
+    if (!editingNote) return ''
+    return `标题：${editingNote.title}\n内容：${editingNote.content}`
+  }
+
   if (!editingNote) {
     return <div className="flex items-center justify-center h-screen">加载中...</div>
   }
@@ -599,6 +606,8 @@ export default function EditPage({ params }: { params: Usable<{ id: string }> })
 
       {/* 提示消息 */}
       <Toaster />
+
+      <Chatbot context={getCurrentNoteContent()} />
     </div>
   )
 }
