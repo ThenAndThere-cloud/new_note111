@@ -10,6 +10,7 @@ import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/comp
 import { toast } from "@/components/ui/use-toast"
 import { Toaster } from "@/components/ui/toaster"
 import { Chatbot } from "@/components/Chatbot"
+import { BingSearchDialog } from "@/components/BingSearchDialog"
 
 // 定义笔记类型
 type Note = {
@@ -342,10 +343,17 @@ export default function HomePage() {
       <div className="w-64 border-r flex flex-col">
         <div className="p-4 border-b">
           <h1 className="text-lg font-medium mb-4">笔记本</h1>
-          <CustomButton onClick={createNewNote} className="w-full py-2 px-4 text-sm font-medium">
-            <PlusCircle className="h-4 w-4 mr-2" />
-            <span>新建笔记</span>
-          </CustomButton>
+          <div className="mt-4">
+            <CustomButton
+              onClick={createNewNote}
+              className="w-full justify-start"
+              variant="outline"
+            >
+              <PlusCircle className="mr-2 h-4 w-4" />
+              新建笔记
+            </CustomButton>
+            <BingSearchDialog />
+          </div>
         </div>
 
         <div className="px-3 py-2">
